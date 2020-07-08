@@ -14,15 +14,32 @@ class App extends Component {
     showPersons: false,
   };
 
-  nameChangedHandler = (event) => {
+  nameChangedHandler = (event, id) => {
+
+    const persons = this.state.persons.map(person => {
+      if(person.id === id){
+        person.name = event.target.value;
+      }
+    })
     this.setState({
-      persons: [
-        { name: "Max", age: 28 },
-        //extract the target, which is the input value, and get the value attribute from it
-        { name: event.target.value, age: 29 },
-        { name: "Max2", age: 70 },
-      ],
-    });
+      persons: persons
+    })
+    //find the index of the person in the array
+    // const personIndex = this.state.persons.findIndex(p => {
+    //   return p.id ===id;
+    // })
+
+    // //copy the values from the original person object to a variable
+    // let person = {
+    //   ...this.state.persons[personIndex]}
+
+    // person.name = event.target.value;
+
+    // const persons = [...this.state.persons]
+    // persons[personIndex] = person;
+    // this.setState({
+    //   persons: persons
+    // });
   };
 
   deletePersonHandler = (personIndex) => {
@@ -58,6 +75,7 @@ class App extends Component {
                 name={person.name}
                 age={person.age}
                 key={person.id}
+                changed={(event) => this.nameChangedHandler(event, person.id)}
               />
             );
           })}
