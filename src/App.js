@@ -1,6 +1,6 @@
 //import React which is responsible for rendering things in the DOM and Component to extend the Component class
 import React, { Component } from "react";
-import "./App.css";
+import classes from "./App.css";
 import Person from "./Person/Person.js";
 
 class App extends Component {
@@ -18,9 +18,11 @@ class App extends Component {
 
     const persons = this.state.persons.map(person => {
       if(person.id === id){
-        person.name = event.target.value;
+        return person.name = event.target.value;
       }
+      return person;
     })
+
     this.setState({
       persons: persons
     })
@@ -57,6 +59,7 @@ class App extends Component {
   render() {
 
     let persons = null;
+    let btnClass = ''
 
     if (this.state.showPersons) {
       persons = (
@@ -75,21 +78,21 @@ class App extends Component {
         </div>
       );
 
-
+      btnClass= classes.Red;
     }
 
-    let classes = [];
+    let assignedClasses = [];
     if (this.state.persons.length <= 2) {
-      classes.push('red') // classes = ['red']
+      assignedClasses.push(classes.red) // classes = ['red']
     }
     if (this.state.persons.length <= 1) {
-      classes.push('bold') // classes = ['bold']
+      assignedClasses.push(classes.bold) // classes = ['bold']
     }
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi, I'm a React app</h1>
-        <p className={classes.join(' ')}>This is really working</p>
-        <button className="button" onClick={this.togglePersonsHandler}>
+        <p className={assignedClasses.join(' ')}>This is really working</p>
+        <button className={btnClass} onClick={this.togglePersonsHandler}>
           Toggle persons
         </button>
         {persons}
