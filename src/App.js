@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import classes from "./App.css";
 import Person from "./Person/Person.js";
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary.js'
 
 class App extends Component {
   state = {
@@ -18,7 +19,7 @@ class App extends Component {
 
     const persons = this.state.persons.map(person => {
       if(person.id === id){
-        return person.name = event.target.value;
+        person.name = event.target.value;
       }
       return person;
     })
@@ -66,13 +67,16 @@ class App extends Component {
         <div>
           {this.state.persons.map((person, index) => {
             return (
-              <Person
+              //error boundary is a higher order component.
+              //it's a component which wraps another component with the goal of handling any error that component might throw
+              <ErrorBoundary  key={person.id}>
+                <Person
                 click={() => this.deletePersonHandler(index)}
                 name={person.name}
                 age={person.age}
-                key={person.id}
                 changed={(event) => this.nameChangedHandler(event, person.id)}
               />
+              </ErrorBoundary>
             );
           })}
         </div>
