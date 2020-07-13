@@ -1,0 +1,72 @@
+//import React which is responsible for rendering things in the DOM and Component to extend the Component class
+import React, { Component } from "react";
+import classes from "./App.css";
+import Persons from '../components/Persons/Persons.js'
+import Cockpit from "../components/Cockpit/Cockpit.js"
+
+class App extends Component {
+  state = {
+    persons: [
+      { id:'fdfd',  name: "Maximilian", age: 28 },
+      { id:'sdfq', name: "Max1", age: 29 },
+      { id:'wfwf', name: "Max2", age: 29 },
+    ],
+    otherState: "some other value",
+    showPersons: false,
+  };
+
+  nameChangedHandler = (event, id) => {
+
+    const persons = this.state.persons.map(person => {
+      if(person.id === id){
+        person.name = event.target.value;
+      }
+      return person;
+    })
+
+    this.setState({
+      persons: persons
+    })
+  };
+
+  deletePersonHandler = (personIndex) => {
+    // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
+    persons.splice(personIndex, 1);
+    this.setState({ persons: persons });
+  };
+
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({ showPersons: !doesShow });
+  };
+
+  render() {
+
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+          < Persons
+           persons = {this.state.persons}
+           clicked = {this.deletePersonHandler}
+           changed = {this.nameChangedHandler}/>
+      );
+
+    }
+
+    return (
+      <div className={classes.App}>
+        <Cockpit 
+          title={this.props.appTitle}
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.togglePersonsHandler}/>
+        {persons}
+      </div>
+    );
+    // return React.createElement('div', null, React.createElement('h1', {className: 'App'}, 'Hi, Im a react app!') )
+  }
+}
+
+export default App;
