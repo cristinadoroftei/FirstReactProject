@@ -24,9 +24,9 @@ class App extends Component {
     return state;
   }
 
-  componentWillMount() {
-    console.log('[App.js] componentWillMount')
-  }
+  // componentWillMount() {
+  //   console.log('[App.js] componentWillMount')
+  // }
 
   componentDidMount(){
     console.log('[App.js] componentDidMount')
@@ -57,6 +57,15 @@ class App extends Component {
     const doesShow = this.state.showPersons;
     this.setState({ showPersons: !doesShow });
   };
+
+  shouldComponentUpdate(nextProps, nextState){
+    console.log('[App.js] shouldComponentUpdate')
+    return true;
+  }
+
+  componentDidUpdate(){
+    console.log('[App.js] componentDidUpdate')
+  }
 
   render() {
     console.log('[App.js] render')
