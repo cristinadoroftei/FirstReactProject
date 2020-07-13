@@ -3,6 +3,7 @@ import React from 'react'
 import Person from './Person/Person.js'
 
 const persons = (props) => {
+        console.log('[Persons.hs] rendering...')
         return props.persons.map((person, index) => {
             return (
               //error boundary is a higher order component.
