@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react'
 
 import Person from './Person/Person.js'
+import PropTypes from 'prop-types'
 
 class Persons extends PureComponent{
 
@@ -33,6 +34,7 @@ class Persons extends PureComponent{
     console.log('[Persons.js] componentDidUpdate')
     console.log(snapshot)
   }
+
         render(){
           console.log('[Persons.hs] rendering...')
           return this.props.persons.map((person, index) => {
@@ -52,6 +54,13 @@ class Persons extends PureComponent{
             })
         }
 
+}
+
+Person.propTypes = {
+  click: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  changed: PropTypes.func
 }
 
 export default Persons;

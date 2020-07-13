@@ -102,6 +102,8 @@ class App extends Component {
     );
     // return React.createElement('div', null, React.createElement('h1', {className: 'App'}, 'Hi, Im a react app!') )
   }
+
+  
 }
 
 export default withClass(App, classes.App);
