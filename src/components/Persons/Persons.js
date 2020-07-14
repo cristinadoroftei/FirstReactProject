@@ -41,7 +41,6 @@ class Persons extends PureComponent{
               return (
                 //error boundary is a higher order component.
                 //it's a component which wraps another component with the goal of handling any error that component might throw
-  
                   <Person
                   key={person.id}
                   click={() => this.props.clicked(index)}
